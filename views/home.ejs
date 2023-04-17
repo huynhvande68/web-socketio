@@ -142,13 +142,21 @@
       }
 
       function handleConnectionSuccess(){
+        username = sessionStorage.getItem('username')
         console.log('Đã kết nối thành công với id: '+ socket.id);
+
+        if(username){
+          console.log('Tên đã được đọc từ sessionstorage');
+        }
         setTimeout(() => {
               if(!username){
-              username  = prompt('Nhập tên của bạn: '); 
+              username  = prompt('Nhập tên của bạn: ');
+              sessionStorage.setItem('username', username);
+              console.log('Đã lưu tên người dùng vào sessionstoregare');
               }
               document.title = 'Bạn là '+ username;
-            socket.emit('register-name', username); //Gửi tên qua cho server
+              socket.emit('register-name', username); //Gửi tên qua cho server
+
         },500)
       }
 
